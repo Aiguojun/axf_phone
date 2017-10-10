@@ -1,0 +1,36 @@
+{% extends 'axf/base.html'%}
+{% load static from staticfiles%}
+{% block title%}{{title}}{% endblock title%}
+{% block linkscript%}
+<link rel="stylesheet" href="{% static 'mine/css/login.css'%}">
+<script type="text/javascript" charset="utf-8" src="{% static 'mine/js/login.js'%}"></script>
+{% endblock linkscript%}
+{% block base%}
+<div id="login">
+    <a href="{% url 'axf:mine'%}"><p>返回</p></a>
+    <div id="box">
+        <form action="{% url 'axf:login'%}" method="POST">
+            {% csrf_token%}
+            <div class="input-group">
+                账户：{{form.username}}
+                <br>
+                {% if error.username.0%}
+                <span>{{error.username.0}}</span>
+                {% endif%}
+            </div>
+             <div class="input-group">
+                密码：{{form.passwd}}
+                <br>
+                {% if error.passwd.0%}
+                <span>{{error.passwd.0}}</span>
+                {% endif%}
+            </div>
+            <input type="submit" value="提交">
+        </form>
+    </div>
+
+
+</div>
+
+
+{% endblock base%}
